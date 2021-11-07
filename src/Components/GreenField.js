@@ -11,7 +11,7 @@ export default function GreenField ({title1, title2, onPress, style}) {
    
   );
 }
-
+//jnfgksl
 const styles = StyleSheet.create({
   cont1: {
     height: 50,
