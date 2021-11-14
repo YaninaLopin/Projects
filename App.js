@@ -6,6 +6,7 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import ClientInfo from './src/ScreensAll/ClientInfo';
 import ListClients from './src/ScreensAll/ListClients.js';
+import InputScreen from './src/ScreensAll/InputScreen';
 
 const stack = createStackNavigator();
 
@@ -23,6 +24,12 @@ export default function App() {
           options={{ headerShown: false }}
           component={ClientInfo}
         />
+        <stack.Screen
+          name="InputScreen"
+          options={{ headerShown: false }}
+          component={InputScreen}
+        />
+       
       </stack.Navigator>
     </NavigationContainer>
   );

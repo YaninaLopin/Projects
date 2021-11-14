@@ -21,14 +21,14 @@ const styles = StyleSheet.create({
     padding:17,
   },
   header: {
-  fontSize: 12,
-  fontWeight: 400,
-  color: 'white',
+    fontSize: 12,
+    fontWeight: '400',
+    color: 'white',
   },
   info: {
-  fontSize: 16,
-  fontWeight: 400,
-  color: 'white',
+    fontSize: 16,
+    fontWeight: '400',
+    color: 'white',
   },
 
 });

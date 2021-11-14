@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
    Header: {
     fontSize: 20,
-    fontWeight: 500,
+    fontWeight: '500',
     paddingLeft:16,
    },
 });

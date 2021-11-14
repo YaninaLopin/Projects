@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import DropDownPicker from 'react-native-dropdown-picker';
 import {
   Text,
   View,
@@ -20,6 +21,7 @@ export default function ListClients({ navigation }) {
       surname: 'Иванов',
       age: 25,
       patronymic: 'Иванович',
+      position: 'Бухгалтер',
       phone: '+7-900-123-45-67',
       cardnumber: '100500',
       blocked: false,
@@ -31,6 +33,7 @@ export default function ListClients({ navigation }) {
       surname: 'Сидоров',
       age: 39,
       patronymic: 'Сергеевич',
+      position: 'Учитель',
       phone: '+7-911-123-12-13',
       cardnumber: '100100',
       blocked: true,
@@ -42,6 +45,7 @@ export default function ListClients({ navigation }) {
       surname: 'Игнатов',
       age: 15,
       patronymic: 'Алексеевич',
+      position: 'Бухгалтер',
       phone: '+7-911-123-33-44',
       cardnumber: '100200',
       blocked: false,
@@ -50,6 +54,8 @@ export default function ListClients({ navigation }) {
     },
   ];
   const [clients, setClients] = useState(clientsmassiv);
+  const [filteredClients, setfilteredClients] = useState(clientsmassiv);
+
 
   const baseClient = {
     name: '',
@@ -74,38 +80,55 @@ export default function ListClients({ navigation }) {
 
   const [text, onChangeText] = useState('Введите имя');
 
-  const addClient = () => {
-    setClients([...clients, { ...baseClient, name: text }]);
-    console.log(clients);
-  };
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    {label: 'Бухгалтер', value: 'Бухгалтер'},
+    {label: 'Учитель', value: 'Учитель'}
+  ]);
+
+  useEffect( () => {
+    console.log('new selected value',value);
+    const newFilteredCliens = filteredClients.filter(client => client.position === value)},
+  [value]);
+
+  // const addClient = () => {
+  //   setClients([...clients, { ...baseClient, name: text }]);
+  //   console.log(clients);
+  // };
 
   return (
     <SafeAreaView style={styles.container}>
     
       <View style={styles.container}>
-
        <RedTop title='Клиенты'/>
        
-        <View style={styles.inputareastyle}>
+      
+        {/* <View style={styles.inputareastyle}>
            <TextInput
              style={styles.input}
             onChangeText={onChangeText}
             value={text}
-          />
-          <View style={styles.buttonstyle}>
-            <Button title='Добавить' onPress={() => addClient()} />
-          </View>
-        </View>
-
+           />
+        </View> */}
        
         <View style={styles.container1}>
-           <FlatList data={clients} renderItem={renderItem} />
-         </View>
-    
+        <DropDownPicker
+         open={open}
+         value={value}
+         items={items}
+         setOpen={setOpen}
+         setValue={setValue}
+         setItems={setItems}
+       /> 
+           <FlatList data={filteredClients} renderItem={renderItem} />
+           <View style={styles.buttonstyle}>
+              <Button title='Добавить клиента' onPress={() => navigation.navigate('InputScreen')} />
+           </View>
+        </View> 
        </View>
     
       </SafeAreaView>
-    
   );
 }
 
@@ -117,10 +140,8 @@ const styles = StyleSheet.create({
 
   container1: {
     flex: 1,
-    //padding: 10,
     marginLeft: 20,
     marginRight: 20,
-
   },
   input: {
     height: 40,
@@ -133,8 +154,8 @@ const styles = StyleSheet.create({
   inputareastyle: {
     flexDirection: 'row',
   },
+
   buttonstyle: {
-    justifyContent: 'space-between',
-    marginTop: 16,
+    flex: 1,
   },
 });

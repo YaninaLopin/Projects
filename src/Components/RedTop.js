@@ -42,9 +42,9 @@ const styles = StyleSheet.create({
 
   header: {
     fontSize: 20,
-    fontWeight: 500,
+    fontWeight: "bold",
     paddingLeft: 16,
     paddingTop: 16,
-    color: 'white',
+    color: "white",
   },
 });

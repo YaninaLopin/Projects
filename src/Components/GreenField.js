@@ -22,12 +22,12 @@ const styles = StyleSheet.create({
   },
   header: {
   fontSize: 12,
-  fontWeight: 400,
+  fontWeight: '400',
   color: 'white',
   },
   info: {
   fontSize: 16,
-  fontWeight: 400,
+  fontWeight: '400',
   color: 'white',
   },
 

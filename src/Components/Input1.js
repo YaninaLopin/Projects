@@ -20,12 +20,12 @@ const styles = StyleSheet.create({
   },
   header: {
   fontSize: 12,
-  fontWeight: 400,
+  fontWeight: '400',
   color: 'black',
   },
   info: {
   fontSize: 16,
-  fontWeight: 400,
+  fontWeight: '400',
   color: 'black',
   },
 
