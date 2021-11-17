@@ -84,13 +84,17 @@ export default function ListClients({ navigation }) {
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
     {label: 'Бухгалтер', value: 'Бухгалтер'},
-    {label: 'Учитель', value: 'Учитель'}
+    {label: 'Учитель', value: 'Учитель'},
+    {label: '----', value: '----'}
   ]);
 
   useEffect( () => {
     console.log('new selected value',value);
-    const newFilteredCliens = filteredClients.filter(client => client.position === value)},
-  [value]);
+    const newFilteredCliens = clients.filter(client => client.position === value);
+    console.log('filtered clients', newFilteredCliens);
+    setfilteredClients(newFilteredCliens)
+  },
+  [value, clients]);
 
   // const addClient = () => {
   //   setClients([...clients, { ...baseClient, name: text }]);
@@ -103,27 +107,19 @@ export default function ListClients({ navigation }) {
       <View style={styles.container}>
        <RedTop title='Клиенты'/>
        
-      
-        {/* <View style={styles.inputareastyle}>
-           <TextInput
-             style={styles.input}
-            onChangeText={onChangeText}
-            value={text}
-           />
-        </View> */}
-       
         <View style={styles.container1}>
-        <DropDownPicker
-         open={open}
-         value={value}
-         items={items}
-         setOpen={setOpen}
-         setValue={setValue}
-         setItems={setItems}
-       /> 
+          <DropDownPicker
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+          /> 
+
            <FlatList data={filteredClients} renderItem={renderItem} />
            <View style={styles.buttonstyle}>
-              <Button title='Добавить клиента' onPress={() => navigation.navigate('InputScreen')} />
+              <Button style={styles.buttonstyle} title='Добавить клиента' onPress={() => navigation.navigate('InputScreen')} />
            </View>
         </View> 
        </View>
@@ -157,5 +153,10 @@ const styles = StyleSheet.create({
 
   buttonstyle: {
     flex: 1,
+    // height: 40,
+    // width: 180,
+   // backgroundColor: 'green',
+   //fontWeight: 'bold',
+
   },
 });
