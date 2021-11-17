@@ -12,70 +12,19 @@ import {
 import RedTop from '../Components/RedTop';
 import Example from '../Components/Example';
 
-export default function InputScreen({ navigation }) {
+export default function InputScreen({ navigation, route }) {
 
+  const onAddClient = route.params.onAddClient;
+
+  const [positioninput, onChangePositionInput] = useState(' ');
   const [nameinput, onChangeNameInput] = useState(' ');
   const [surnameinput, onChangeSurnameInput] = useState(' ');
   const [ageinput, onChangeAgeInput] = useState(' ');
   const [patronymicinput, onChangePatronymicInput] = useState(' ');
   const [phoneinput, onChangePhoneInput] = useState(' ');
 
-  const clientsmassiv = [
-    {
-      name: 'Иван',
-      surname: 'Иванов',
-      age: 25,
-      patronymic: 'Иванович',
-      phone: '+7-900-123-45-67',
-      cardnumber: '100500',
-      blocked: false,
-      coupons: 4,
-      issued: 1,
-    },
-    {
-      name: 'Сергей',
-      surname: 'Сидоров',
-      age: 39,
-      patronymic: 'Сергеевич',
-      phone: '+7-911-123-12-13',
-      cardnumber: '100100',
-      blocked: true,
-      coupons: 12,
-      issued: 1,
-    },
-    {
-      name: 'Измаил',
-      surname: 'Игнатов',
-      age: 15,
-      patronymic: 'Алексеевич',
-      phone: '+7-911-123-33-44',
-      cardnumber: '100200',
-      blocked: false,
-      coupons: 7,
-      issued: 3,
-    },
-  ];
-  const [clients, setClients] = useState(clientsmassiv);
-
-  const baseClient = {
-    name: '',
-    surname: '',
-    age: 0,
-    patronymic: '',
-    phone: '',
-    cardnumber: '',
-    blocked: false,
-    coupons: 0,
-    issued: 0,
-  };
-
-  const addClient = () => {
-     setClients([...clients, { ...baseClient, name: nameinput}]);
-  console.log(clients);
- };
-
   return(
- <SafeAreaView style={styles.container}>
+   <SafeAreaView style={styles.container}>
     
     <View style={styles.container}>
 
@@ -85,11 +34,11 @@ export default function InputScreen({ navigation }) {
      
        <View style={styles.inputareastyle}>
 
-         <Text style={styles.textstyle}> Введите имя: </Text>
-         <TextInput
-           style={styles.input}
-           onChangeText={onChangeNameInput}
-           value={nameinput}
+       <Text style={styles.textstyle}> Введите должность: </Text> 
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangePositionInput}
+          value={positioninput}
         />
 
         <Text style={styles.textstyle}> Введите фамилию: </Text> 
@@ -98,12 +47,12 @@ export default function InputScreen({ navigation }) {
           onChangeText={onChangeSurnameInput}
           value={surnameinput}
         />
-          
-        <Text style={styles.textstyle}> Введите возраст: </Text>  
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeAgeInput}
-          value={ageinput}
+
+        <Text style={styles.textstyle}> Введите имя: </Text>
+         <TextInput
+           style={styles.input}
+           onChangeText={onChangeNameInput}
+           value={nameinput}
         />
 
         <Text style={styles.textstyle}> Введите отчество: </Text>
@@ -111,6 +60,13 @@ export default function InputScreen({ navigation }) {
           style={styles.input}
           onChangeText={onChangePatronymicInput}
           value={patronymicinput}
+        />
+          
+        <Text style={styles.textstyle}> Введите возраст: </Text>  
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeAgeInput}
+          value={ageinput}
         />
         
         <Text style={styles.textstyle}> Введите номер телефона: </Text>
@@ -123,7 +79,22 @@ export default function InputScreen({ navigation }) {
        </View> 
 
        <View style={styles.buttonstyle}>
-          <Button title='Добавить' onPress={() => addClient()} />    
+          <Button title='Добавить клиента в базу' onPress={() => {
+           
+           const client =  {
+            position: "Учитель", 
+            name: nameinput,
+            surname: surnameinput,
+            age: ageinput,
+            patronymic: patronymicinput,
+            phone:phoneinput
+          };
+           
+          onAddClient (client); 
+          console.log(client);
+          navigation.goBack();
+          }} />    
+
        </View>
 
      </View>
@@ -144,8 +115,8 @@ container1: {
 
 },
 input: {
-  height: 40,
-  width: 300,
+  height: 50,
+  width: 330,
   margin: 12,
   borderWidth: 1,
   padding: 10,

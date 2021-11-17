@@ -14,7 +14,7 @@ import {
 import RedTop from '../Components/RedTop';
 import NameBlock from '../Components/NameBlock';
 
-export default function ListClients({ navigation }) {
+export default function ListClients({ navigation, route }) {
   const clientsmassiv = [
     {
       name: 'Иван',
@@ -53,9 +53,10 @@ export default function ListClients({ navigation }) {
       issued: 3,
     },
   ];
+
+  // hoocks to add new client
   const [clients, setClients] = useState(clientsmassiv);
   const [filteredClients, setfilteredClients] = useState(clientsmassiv);
-
 
   const baseClient = {
     name: '',
@@ -67,6 +68,10 @@ export default function ListClients({ navigation }) {
     blocked: false,
     coupons: 0,
     issued: 0,
+  };
+
+  const onAddClient = (client) => {
+    setClients([...clients, client]);
   };
 
   const renderItem = ({ item }) => {
@@ -84,8 +89,7 @@ export default function ListClients({ navigation }) {
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
     {label: 'Бухгалтер', value: 'Бухгалтер'},
-    {label: 'Учитель', value: 'Учитель'},
-    {label: '----', value: '----'}
+    {label: 'Учитель', value: 'Учитель'}
   ]);
 
   useEffect( () => {
@@ -96,10 +100,6 @@ export default function ListClients({ navigation }) {
   },
   [value, clients]);
 
-  // const addClient = () => {
-  //   setClients([...clients, { ...baseClient, name: text }]);
-  //   console.log(clients);
-  // };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -119,7 +119,10 @@ export default function ListClients({ navigation }) {
 
            <FlatList data={filteredClients} renderItem={renderItem} />
            <View style={styles.buttonstyle}>
-              <Button style={styles.buttonstyle} title='Добавить клиента' onPress={() => navigation.navigate('InputScreen')} />
+              <Button 
+                 style={styles.buttonstyle} 
+                 title='Добавить клиента' 
+                 onPress={() => navigation.navigate('InputScreen',{ onAddClient})} />
            </View>
         </View> 
        </View>
