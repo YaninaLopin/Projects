@@ -96,7 +96,8 @@ export default function ListClients({ navigation, route }) {
     console.log('new selected value',value);
     const newFilteredCliens = clients.filter(client => client.position === value);
     console.log('filtered clients', newFilteredCliens);
-    setfilteredClients(newFilteredCliens)
+    setfilteredClients(value === undefined || value === null ? clients : newFilteredCliens)
+    //запись в скобках позволяет отображать всех клиентов при пустом фильтре
   },
   [value, clients]);
 

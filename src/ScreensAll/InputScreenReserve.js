@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   View,
@@ -14,44 +14,14 @@ import Example from '../Components/Example';
 
 export default function InputScreen({ navigation, route }) {
 
-const onAddClient = route.params.onAddClient;
+  const onAddClient = route.params.onAddClient;
 
-  // const [positioninput, onChangePositionInput] = useState(' ');
-  // const [nameinput, onChangeNameInput] = useState(' ');
-  // const [surnameinput, onChangeSurnameInput] = useState(' ');
-  // const [ageinput, onChangeAgeInput] = useState(' ');
-  // const [patronymicinput, onChangePatronymicInput] = useState(' ');
-  // const [phoneinput, onChangePhoneInput] = useState(' ');
-  
-  const initialValue = {
-    position: 'Учитель',
-    name: '',
-    surname: '',
-    age: '',
-    patronymic: '',
-    phone: '',
-  };
-  
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case 'position':
-        return { ...state, position: action.payload };
-      case 'name':
-        return { ...state, name: action.payload };
-      case 'surname':
-        return { ...state, surname: action.payload }; 
-      case 'age':
-        return { ...state, age: action.payload }; 
-      case 'patronymic':
-        return { ...state, patronymic: action.payload };   
-      case 'phone':
-        return { ...state, phone: action.payload };       
-      default:
-        throw new Error(`Unknown action type: ${action.type}`);
-    }
-  };
-  
-  const [state, dispatch] = useReducer(reducer, initialValue);
+  const [positioninput, onChangePositionInput] = useState(' ');
+  const [nameinput, onChangeNameInput] = useState(' ');
+  const [surnameinput, onChangeSurnameInput] = useState(' ');
+  const [ageinput, onChangeAgeInput] = useState(' ');
+  const [patronymicinput, onChangePatronymicInput] = useState(' ');
+  const [phoneinput, onChangePhoneInput] = useState(' ');
 
   return(
    <SafeAreaView style={styles.container}>
@@ -67,50 +37,61 @@ const onAddClient = route.params.onAddClient;
        <Text style={styles.textstyle}> Введите должность: </Text> 
         <TextInput
           style={styles.input}
-          onChangeText={(text) => dispatch({type: 'position', payload: text})}
-          value={state.position}
+          onChangeText={onChangePositionInput}
+          value={positioninput}
         />
 
         <Text style={styles.textstyle}> Введите фамилию: </Text> 
         <TextInput
           style={styles.input}
-          onChangeText={(text) => dispatch({type: 'surname', payload: text})}
-          value={state.surname}
+          onChangeText={onChangeSurnameInput}
+          value={surnameinput}
         />
 
         <Text style={styles.textstyle}> Введите имя: </Text>
          <TextInput
            style={styles.input}
-           onChangeText={(text) => dispatch({type: 'name', payload: text})}
-           value={state.name}
+           onChangeText={onChangeNameInput}
+           value={nameinput}
         />
 
         <Text style={styles.textstyle}> Введите отчество: </Text>
         <TextInput
           style={styles.input}
-          onChangeText={(text) => dispatch({type: 'patronymic', payload: text})}
-          value={state.patronymic}
+          onChangeText={onChangePatronymicInput}
+          value={patronymicinput}
         />
           
         <Text style={styles.textstyle}> Введите возраст: </Text>  
         <TextInput
           style={styles.input}
-          onChangeText={(text) => dispatch({type: 'age', payload: text})}
-          value={state.age}
+          onChangeText={onChangeAgeInput}
+          value={ageinput}
         />
         
         <Text style={styles.textstyle}> Введите номер телефона: </Text>
         <TextInput
           style={styles.input}
-          onChangeText={(text) => dispatch({type: 'phone', payload: text})}
-          value={state.phone}
+          onChangeText={onChangePhoneInput}
+          value={phoneinput}
         />
       
        </View> 
 
        <View style={styles.buttonstyle}>
           <Button title='Добавить клиента в базу' onPress={() => {
-          onAddClient (state); 
+           
+           const client =  {
+            position: "Учитель", 
+            name: nameinput,
+            surname: surnameinput,
+            age: ageinput,
+            patronymic: patronymicinput,
+            phone:phoneinput
+          };
+           
+          onAddClient (client); 
+          console.log(client);
           navigation.goBack();
           }} />    
 
