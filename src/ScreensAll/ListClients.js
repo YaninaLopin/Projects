@@ -13,8 +13,12 @@ import {
 } from 'react-native';
 import RedTop from '../Components/RedTop';
 import NameBlock from '../Components/NameBlock';
+import { useSelector, useDispatch } from 'react-redux';
+import {addClient} from '../Reducers/clientReducer';
 
 export default function ListClients({ navigation, route }) {
+  const dispatch = useDispatch();
+
   const clientsmassiv = [
     {
       name: 'Иван',
@@ -72,6 +76,7 @@ export default function ListClients({ navigation, route }) {
 
   const onAddClient = (client) => {
     setClients([...clients, client]);
+    dispatch(addClient(client));
   };
 
   const renderItem = ({ item }) => {
@@ -83,6 +88,10 @@ export default function ListClients({ navigation, route }) {
     );
   };
 
+  // используем useSelector
+  const clientsRed = useSelector((state) => state.clients);
+  console.log('clientsRed', clientsRed);
+
   const [text, onChangeText] = useState('Введите имя');
 
   const [open, setOpen] = useState(false);
@@ -93,14 +102,15 @@ export default function ListClients({ navigation, route }) {
   ]);
 
   useEffect( () => {
-    console.log('new selected value',value);
-    const newFilteredCliens = clients.filter(client => client.position === value);
-    console.log('filtered clients', newFilteredCliens);
-    setfilteredClients(value === undefined || value === null ? clients : newFilteredCliens)
+   // console.log('new selected value',value);
+    const newFilteredCliens = clientsRed.filter(client => client.position === value);
+   // console.log('filtered clients', newFilteredCliens);
+    setfilteredClients(value === undefined || value === null ? clientsRed : newFilteredCliens)
     //запись в скобках позволяет отображать всех клиентов при пустом фильтре
   },
-  [value, clients]);
+  [value, clientsRed]);
 
+ 
 
   return (
     <SafeAreaView style={styles.container}>
@@ -124,7 +134,7 @@ export default function ListClients({ navigation, route }) {
               <Button 
                  style={styles.buttonstyle} 
                  title='Добавить клиента' 
-                 onPress={() => navigation.navigate('InputScreen',{ onAddClient})} />
+                 onPress={() => navigation.navigate('InputScreen',{onAddClient})} />
            </View>
         </View> 
        </View>
