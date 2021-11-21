@@ -119,6 +119,7 @@ export default function ListClients({ navigation, route }) {
           /> 
 
            <FlatList data={filteredClients} renderItem={renderItem} />
+           {/* // сделать Key Extractor */}
            <View style={styles.buttonstyle}>
               <Button 
                  style={styles.buttonstyle} 
