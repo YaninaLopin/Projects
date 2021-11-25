@@ -1477,9 +1477,9 @@
     "redux" "^4.0.0"
 
 "@types/react@*":
-  "integrity" "sha512-r3C8/TJuri/SLZiiwwxQoLAoavaczARfT9up9b4Jr65+ErAUX3MIkU0oMOQnrpfgHme8zIqZLX7O5nnjm5Wayw=="
-  "resolved" "https://registry.npmjs.org/@types/react/-/react-17.0.35.tgz"
-  "version" "17.0.35"
+  "integrity" "sha512-CUFUp01OdfbpN/76v4koqgcpcRGT3sYOq3U3N6q0ZVGcyeP40NUdVU+EWe3hs34RNaTefiYyBzOpxBBidCc5zw=="
+  "resolved" "https://registry.npmjs.org/@types/react/-/react-17.0.36.tgz"
+  "version" "17.0.36"
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -4784,7 +4784,12 @@
   dependencies:
     "resolve" "^1.1.6"
 
-"redux@^4.0.0", "redux@^4.1.2":
+"redux-persist@^6.0.0":
+  "integrity" "sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ=="
+  "resolved" "https://registry.npmjs.org/redux-persist/-/redux-persist-6.0.0.tgz"
+  "version" "6.0.0"
+
+"redux@^4.0.0", "redux@^4.1.2", "redux@>4.0.0":
   "integrity" "sha512-SH8PglcebESbd/shgf6mii6EIoRM0zrQyjcuQ+ojmfxjTtE0z9Y8pa62iA/OJ58qjP6j27uyW4kUF4jl/jd6sw=="
   "resolved" "https://registry.npmjs.org/redux/-/redux-4.1.2.tgz"
   "version" "4.1.2"

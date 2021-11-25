@@ -30,6 +30,7 @@ const onAddClient = route.params.onAddClient;
     age: '',
     patronymic: '',
     phone: '',
+    //id: '',
   };
   
   const reducer = (state, action) => {

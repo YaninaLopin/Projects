@@ -1,15 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
 import combineReducers from './src/Reducers/index';
 
 import ClientInfo from './src/ScreensAll/ClientInfo';
 import ListClients from './src/ScreensAll/ListClients.js';
 import InputScreen from './src/ScreensAll/InputScreen';
+import Registration from './src/ScreensAll/Registration';
 
 const stack = createStackNavigator();
 
@@ -20,6 +21,11 @@ export default function App() {
     <Provider store={store}>
     <NavigationContainer>
       <stack.Navigator>
+        <stack.Screen
+          name="Registration"
+          options={{ headerShown: false }}
+          component={Registration}
+        />
         <stack.Screen
           name="Main"
           options={{ headerShown: false }}

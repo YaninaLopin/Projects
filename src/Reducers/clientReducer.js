@@ -1,6 +1,7 @@
 const ADD_CLIENS = 'clients\ADD_CLIENS';
 
-const initialValue = [    {
+const initialValue = [       
+{
     name: 'Иван',
     surname: 'Иванов',
     age: 25,

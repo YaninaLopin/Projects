@@ -31,6 +31,7 @@ export default function ListClients({ navigation, route }) {
       blocked: false,
       coupons: 4,
       issued: 1,
+      //id: "Ivan",
     },
     {
       name: 'Сергей',
@@ -43,6 +44,7 @@ export default function ListClients({ navigation, route }) {
       blocked: true,
       coupons: 12,
       issued: 1,
+      //id: "Sergei",
     },
     {
       name: 'Измаил',
@@ -55,6 +57,7 @@ export default function ListClients({ navigation, route }) {
       blocked: false,
       coupons: 7,
       issued: 3,
+      //id: "Ismail",
     },
   ];
 
@@ -90,7 +93,9 @@ export default function ListClients({ navigation, route }) {
 
   // используем useSelector
   const clientsRed = useSelector((state) => state.clients);
-  console.log('clientsRed', clientsRed);
+ // console.log('clientsRed', clientsRed);
+
+ const auth=route.params.auth;
 
   const [text, onChangeText] = useState('Введите имя');
 
@@ -110,7 +115,6 @@ export default function ListClients({ navigation, route }) {
   },
   [value, clientsRed]);
 
- 
 
   return (
     <SafeAreaView style={styles.container}>
@@ -119,6 +123,9 @@ export default function ListClients({ navigation, route }) {
        <RedTop title='Клиенты'/>
        
         <View style={styles.container1}>
+
+        <Text style={styles.textstyle}> Вы авторизовались как  {auth.join('   тел. ')} </Text>
+
           <DropDownPicker
             open={open}
             value={value}
@@ -128,8 +135,12 @@ export default function ListClients({ navigation, route }) {
             setItems={setItems}
           /> 
 
-           <FlatList data={filteredClients} renderItem={renderItem} />
-           {/* // сделать Key Extractor */}
+           <FlatList 
+              data={filteredClients} 
+              renderItem={renderItem} 
+              //keyExtractor={(myKey) => myKey.id}
+            />
+          
            <View style={styles.buttonstyle}>
               <Button 
                  style={styles.buttonstyle} 
@@ -153,6 +164,8 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 20,
     marginRight: 20,
+    marginTop:10,
+    //justifyContent: 'space-between',
   },
   input: {
     height: 40,
@@ -164,6 +177,13 @@ const styles = StyleSheet.create({
 
   inputareastyle: {
     flexDirection: 'row',
+  },
+
+  textstyle: {
+    fontWeight: "400",
+    fontSize: 18,
+    color: 'blue',
+    marginBottom: 10,
   },
 
   buttonstyle: {
