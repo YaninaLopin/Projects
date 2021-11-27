@@ -14,7 +14,7 @@ import Registration from './src/ScreensAll/Registration';
 
 const stack = createStackNavigator();
 
-const store = createStore(combineReducers);
+const store = createStore(combineReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export default function App() {
   return (

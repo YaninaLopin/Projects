@@ -92,10 +92,12 @@ export default function ListClients({ navigation, route }) {
   };
 
   // используем useSelector
-  const clientsRed = useSelector((state) => state.clients);
+  const clientsRed = useSelector(state => state.clients);
+  const profile = useSelector(state => state.profile);
+
  // console.log('clientsRed', clientsRed);
 
- const auth=route.params.auth;
+ //const auth=route.params.auth;
 
   const [text, onChangeText] = useState('Введите имя');
 
@@ -124,7 +126,7 @@ export default function ListClients({ navigation, route }) {
        
         <View style={styles.container1}>
 
-        <Text style={styles.textstyle}> Вы авторизовались как  {auth.join('   тел. ')} </Text>
+         <Text style={styles.textstyle}> Вы авторизовались как {profile.name} </Text> 
 
           <DropDownPicker
             open={open}
@@ -165,7 +167,6 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     marginTop:10,
-    //justifyContent: 'space-between',
   },
   input: {
     height: 40,

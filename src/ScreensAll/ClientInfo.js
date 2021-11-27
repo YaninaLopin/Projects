@@ -21,7 +21,7 @@ export default function ClientInfo({ navigation, route }) {
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <RedTop title=" <  О клиенте" />
+          <RedTop title = " <  О клиенте" />
         </TouchableOpacity>
       <View/>
 

@@ -9,13 +9,44 @@ import {
   TextInput,
   SafeAreaView,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { registration } from '../Reducers/profileReduser';
+
+const baseUser = {
+  phone: '',
+  name: '',
+  email: '',
+}
+
+const reducer = (state=baseUser, action) => {
+  switch (action.type) {
+    case 'name':
+      return {...state, name: action.payload };
+    case 'phone':
+      return { ...state, phone: action.payload };
+    case 'email':
+      return { ...state, email: action.payload };
+    default:
+      throw new Error('Unknown action type');
+  }
+};
 
 export default function Registration({ navigation, route }) {
 
-const [regphone, onChangePhone] = useState ('');
-const [regname, onChangeName] = useState ('');
-const [regemail, onChangeEmail] = useState ('');
+// const [regphone, onChangePhone] = useState ('');
+// const [regname, onChangeName] = useState ('');
+// const [regemail, onChangeEmail] = useState ('');
 
+//const dispatch = useDispatch();
+const [user, dispatch] = useReducer(reducer, baseUser);
+
+const regDispatch = useDispatch();
+
+const onRegistration = () => {
+  regDispatch(registration(user))
+  //console.log('registration', state)
+  navigation.navigate('Main')
+}
   
   return(
    <SafeAreaView style={styles.container}>
@@ -36,30 +67,37 @@ const [regemail, onChangeEmail] = useState ('');
        <Text style={styles.textstyle}> Номер телефона* </Text> 
          <TextInput
           style={styles.input}
-          onChangeText={onChangePhone}
-          value={regphone}
+          placeholder="+7 (911) 454-03-99"
+          value={user.phone}
+          onChangeText={(text) =>
+            dispatch({ type: 'phone', payload: text })
+          }
          /> 
        
        <Text style={styles.textstyle}> Имя </Text> 
          <TextInput
           style={styles.input}
-          onChangeText={onChangeName}
-          value={regname}
+          placeholder="Yanina"
+          value={user.name}
+          onChangeText={(text) =>
+            dispatch({ type: 'name', payload: text })
+          }
          /> 
 
        <Text style={styles.textstyle}> E-mail* </Text> 
          <TextInput
           style={styles.input}
-          onChangeText={onChangeEmail}
-          value={regemail}
+          placeholder="hello@gmail.com"
+          value={user.email}
+          onChangeText={(text) =>
+            dispatch({ type: 'email', payload: text })
+          }
          />  
     
        </View> 
 
-       <TouchableOpacity style={styles.button} onPress={() => {
-            const auth = [regname, regphone];
-            navigation.navigate('Main',{auth})
-          }}>
+       <TouchableOpacity style={styles.button} 
+                         onPress={() => onRegistration() }>
           <Text style={styles.buttontext}> РЕГИСТРАЦИЯ </Text> 
        </TouchableOpacity>     
 
