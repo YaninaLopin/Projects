@@ -6,42 +6,31 @@ import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import { useSelector } from 'react-redux';
-import combineReducers from './src/Reducers/index';
+import combineReducers from '../src/Reducers/index';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import ClientInfo from './src/ScreensAll/ClientInfo';
-import ListClients from './src/ScreensAll/ListClients.js';
-import InputScreen from './src/ScreensAll/InputScreen';
-import Registration from './src/ScreensAll/Registration';
-//import RootNavigator from './navigation/RootNavigator1';
-import { PersistGate } from 'redux-persist/integration/react';
+
+import ClientInfo from '../src/ScreensAll/ClientInfo';
+import ListClients from '../src/ScreensAll/ListClients';
+import InputScreen from '../src/ScreensAll/InputScreen';
+import Registration from '../src/ScreensAll/Registration';
 
 const Stack = createStackNavigator();
 
-const persistConfig = {
-  key: 'root',
-  storage: AsyncStorage,
-}
-const persistedReducer = persistReducer(persistConfig, combineReducers);
+// const persistConfig = {
+//     key: 'root',
+//     storage: AsyncStorage,
+//   }
+  
+// const persistedReducer = persistReducer(persistConfig, combineReducers);
 
-const store = createStore(persistedReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-let persistor = persistStore(store);
+// const store = createStore(persistedReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+// let persistor = persistStore(store);
 
-export default function App() {
-  return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-      <NavigationContainer>
-        <RootNavigator/>
-      </NavigationContainer>
-      </PersistGate>
-    </Provider>
-  );
-}
-
-const RootNavigator = () =>  {
+export default function RootNavigator({ navigation, route })  {
   const profileID = useSelector(state => state.profile.signedUp)  
+
   return (
       <Stack.Navigator> 
         {!profileID && (
@@ -65,7 +54,7 @@ const RootNavigator = () =>  {
           options={{ headerShown: false }}
           component={InputScreen}
         />
-      
+       
       </Stack.Navigator>
   
   );

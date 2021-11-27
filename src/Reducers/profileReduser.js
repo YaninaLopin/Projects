@@ -5,6 +5,7 @@ const initialValue = {
     name: '',
     surname: '',
     email: '',
+    signedUp: false,
   }
 
   const profileReducer = (state=initialValue, action) => {
